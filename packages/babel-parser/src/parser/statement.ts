@@ -1627,7 +1627,7 @@ export default abstract class StatementParser extends ExpressionParser {
       node.generator = true;
     }
 
-    if(this.match(tt.doubleAt)) {
+    if (this.match(tt.doubleAt)) {
       this.next(); // eat *
       node.curry = true;
     }

@@ -2757,7 +2757,7 @@ export default abstract class ExpressionParser extends LValParser {
     if (tokenIsKeywordOrIdentifier(type)) {
       name = this.state.value;
     } else {
-      console.log("Current Token...", this.state.value); 
+      console.log("Current Token...", this.state.value);
       console.log("Next Token...", this.lookahead().value);
       this.unexpected();
     }
