@@ -167,6 +167,7 @@ export const tt = {
   templateNonTail: createToken("...${", { beforeExpr, startsExpr }),
   // end: isTemplate
   at: createToken("@"),
+  atat: createToken("@@"),
   hash: createToken("#", { startsExpr }),
 
   // Special hashbang token.

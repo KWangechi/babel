@@ -1627,6 +1627,11 @@ export default abstract class StatementParser extends ExpressionParser {
       node.generator = true;
     }
 
+    if(this.match(tt.doubleAt)) {
+      this.next(); // eat *
+      node.curry = true;
+    }
+
     if (isDeclaration) {
       node.id = this.parseFunctionId(requireId);
     }

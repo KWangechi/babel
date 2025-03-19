@@ -727,7 +727,7 @@ export default abstract class Tokenizer extends CommentsParser {
 
     // '@@'
     if (
-      next === charCodes.atSign &&
+      next === charCodes.atSign ||
       this.hasPlugin([
         "pipelineOperator",
         { proposal: "hack", topicToken: "@@" },
