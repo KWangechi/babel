@@ -2339,6 +2339,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@babel/plugin-transform-curry-function@workspace:packages/babel-plugin-transform-curry-function":
+  version: 0.0.0-use.local
+  resolution: "@babel/plugin-transform-curry-function@workspace:packages/babel-plugin-transform-curry-function"
+  dependencies:
+    "@babel/core": "workspace:^"
+    "@babel/helper-plugin-test-runner": "workspace:^"
+    "@babel/helper-plugin-utils": "workspace:^"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  languageName: unknown
+  linkType: soft
+
 "@babel/plugin-transform-destructuring@npm:^8.0.0-alpha.16":
   version: 8.0.0-alpha.16
   resolution: "@babel/plugin-transform-destructuring@npm:8.0.0-alpha.16"

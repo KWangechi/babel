@@ -271,6 +271,9 @@
       "path": "./packages/babel-plugin-transform-computed-properties"
     },
     {
+      "path": "./packages/babel-plugin-transform-curry-function"
+    },
+    {
       "path": "./packages/babel-plugin-transform-destructuring"
     },
     {

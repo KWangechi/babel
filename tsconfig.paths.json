@@ -260,6 +260,9 @@
       "@babel/plugin-transform-computed-properties": [
         "./packages/babel-plugin-transform-computed-properties/src"
       ],
+      "@babel/plugin-transform-curry-function": [
+        "./packages/babel-plugin-transform-curry-function/src"
+      ],
       "@babel/plugin-transform-destructuring": [
         "./packages/babel-plugin-transform-destructuring/src"
       ],

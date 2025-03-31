@@ -9,3 +9,5 @@ describe("curry function syntax", function () {
     expect(getParser(`function @@ foo() {}`)()).toMatchSnapshot();
   });
 });
+
+// I want to read a test file and parse it
