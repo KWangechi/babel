@@ -398,8 +398,13 @@ export default (superClass: typeof Parser) =>
 
     // Parses following JSX attribute name-value pair.
 
-    jsxParseAttribute(): N.JSXAttribute | N.JSXSpreadAttribute {
-      const node = this.startNode<N.JSXAttribute | N.JSXSpreadAttribute>();
+    jsxParseAttribute():
+      | N.JSXAttribute
+      | N.JSXSpreadAttribute
+      | N.JSXPropShorthandAttribute {
+      const node = this.startNode<
+        N.JSXAttribute | N.JSXSpreadAttribute | N.JSXPropShorthandAttribute
+      >();
       if (this.match(tt.braceL)) {
         this.setContext(tc.brace);
         this.next();
@@ -409,6 +414,16 @@ export default (superClass: typeof Parser) =>
         this.state.canStartJSXElement = true;
         this.expect(tt.braceR);
         return this.finishNode(node, "JSXSpreadAttribute");
+      }
+
+      // new syntax for JSX Prop Shorthand e.g <CompA ::propA ::propB /> to represent <CompA propA={propA} propB={propB} />
+      if (this.match(tt.doubleColon)) {
+        this.next();
+        node.name = this.jsxParseIdentifier();
+
+        console.log(node.name);
+
+        return this.finishNode(node, "JSXPropShorthandAttribute");
       }
       node.name = this.jsxParseNamespacedName();
       node.value = this.eat(tt.eq) ? this.jsxParseAttributeValue() : null;
@@ -435,7 +450,11 @@ export default (superClass: typeof Parser) =>
     jsxParseOpeningElementAfterName(
       node: Undone<N.JSXOpeningElement>,
     ): N.JSXOpeningElement {
-      const attributes: (N.JSXAttribute | N.JSXSpreadAttribute)[] = [];
+      const attributes: (
+        | N.JSXAttribute
+        | N.JSXSpreadAttribute
+        | N.JSXPropShorthandAttribute
+      )[] = [];
       while (!this.match(tt.slash) && !this.match(tt.jsxTagEnd)) {
         attributes.push(this.jsxParseAttribute());
       }

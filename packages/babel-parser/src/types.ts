@@ -1132,6 +1132,10 @@ export type JSXSpreadChild = NodeAny<"JSXSpreadChild">;
 export type JSXExpressionContainer = NodeAny<"JSXExpressionContainer">;
 export type JSXAttribute = NodeAny<"JSXAttribute">;
 export type JSXSpreadAttribute = NodeAny<"JSXSpreadAttribute">;
+
+// add a new type for JSXPropShorthandAttribute
+export type JSXPropShorthandAttribute = NodeAny<"JSXPropShorthandAttribute">;
+
 export interface JSXOpeningElement extends NodeBase {
   type: "JSXOpeningElement";
   name: JSXNamespacedName | JSXMemberExpression;
@@ -1140,7 +1144,7 @@ export interface JSXOpeningElement extends NodeBase {
    * @deprecated
    */
   typeParameters?: TypeParameterInstantiationBase | null; // TODO: Not in spec,
-  attributes: (JSXAttribute | JSXSpreadAttribute)[];
+  attributes: (JSXAttribute | JSXSpreadAttribute | JSXPropShorthandAttribute)[];
   selfClosing: boolean;
 }
 export type JSXClosingElement = NodeAny<"JSXClosingElement">;
@@ -2058,6 +2062,7 @@ export type Node =
   | ImportSpecifier
   | InterpreterDirective
   | JSXAttribute
+  | JSXPropShorthandAttribute
   | JSXClosingElement
   | JSXClosingFragment
   | JSXElement
