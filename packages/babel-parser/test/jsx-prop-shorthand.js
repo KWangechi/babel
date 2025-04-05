@@ -1,6 +1,4 @@
 import { parse } from "../lib/index.js";
-// import * from jsx from '../src/plugins/jsx/index.ts'
-// import jsxPlugin from "../src/plugins/jsx/index.ts";
 
 const code = `
 export default function ChildComponent({name, age}) {
@@ -19,9 +17,13 @@ return (
 
 // parse the code with the JSX plugin enabled
 const ast = parse(code, {
-  plugins: ["jsx"], // plugin is not being loaded correctly
+  plugins: ["jsx"],
   sourceType: "module",
 });
 
-// print the AST
-console.log(JSON.stringify(ast, null, 2));
+describe("test jsx-prop-shorthand", function () {
+  it("should parse", function () {
+    console.log("Testing New JSX syntax tokenization");
+    expect(ast).toMatchSnapshot();
+  });
+});
