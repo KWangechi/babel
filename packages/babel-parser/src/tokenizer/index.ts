@@ -933,7 +933,16 @@ export default abstract class Tokenizer extends CommentsParser {
           this.input.charCodeAt(this.state.pos + 1) === charCodes.colon
         ) {
           this.finishOp(tt.doubleColon, 2);
-        } else {
+        }
+        // Proposal for tokenizing a JSXPropShorthandAttribute
+        // else if (
+        //   this.hasPlugin("jsx") &&
+        //   this.input.charCodeAt(this.state.pos + 1) === charCodes.colon
+        // ) {
+        //   this.finishOp(tt.doubleColon, 2);
+        //   this.finishToken(tt.doubleColon);
+        // }
+        else {
           ++this.state.pos;
           this.finishToken(tt.colon);
         }

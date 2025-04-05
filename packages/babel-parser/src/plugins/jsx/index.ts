@@ -260,6 +260,7 @@ export default (superClass: typeof Parser) =>
     jsxReadWord(): void {
       let ch;
       const start = this.state.pos;
+
       do {
         ch = this.input.charCodeAt(++this.state.pos);
       } while (isIdentifierChar(ch) || ch === charCodes.dash);
@@ -270,6 +271,7 @@ export default (superClass: typeof Parser) =>
 
     jsxParseIdentifier(): N.JSXIdentifier {
       const node = this.startNode<N.JSXIdentifier>();
+
       if (this.match(tt.jsxName)) {
         node.name = this.state.value;
       } else if (tokenIsKeyword(this.state.type)) {
@@ -281,9 +283,26 @@ export default (superClass: typeof Parser) =>
       return this.finishNode(node, "JSXIdentifier");
     }
 
+    // Parse double colon token as a JSXPropShorthandAttribute
+    jsxParsePropShorthand(): N.JSXPropShorthandAttribute {
+      const node = this.startNode<N.JSXPropShorthandAttribute>();
+      this.expect(tt.doubleColon);
+      this.next();
+
+      this.expect(tt.jsxName);
+
+      node.name = this.state.value;
+      this.next();
+
+      return this.finishNode(node, "JSXPropShorthandAttribute");
+    }
+
     // Parse namespaced identifier.
 
-    jsxParseNamespacedName(): N.JSXNamespacedName | N.JSXIdentifier {
+    jsxParseNamespacedName():
+      | N.JSXNamespacedName
+      | N.JSXIdentifier
+      | N.JSXPropShorthandAttribute {
       const startLoc = this.state.startLoc;
       const name = this.jsxParseIdentifier();
       if (!this.eat(tt.colon)) return name;
@@ -300,11 +319,18 @@ export default (superClass: typeof Parser) =>
     jsxParseElementName():
       | N.JSXIdentifier
       | N.JSXNamespacedName
-      | N.JSXMemberExpression {
+      | N.JSXMemberExpression
+      | N.JSXPropShorthandAttribute {
       const startLoc = this.state.startLoc;
-      let node: N.JSXIdentifier | N.JSXNamespacedName | N.JSXMemberExpression =
-        this.jsxParseNamespacedName();
-      if (node.type === "JSXNamespacedName") {
+      let node:
+        | N.JSXIdentifier
+        | N.JSXNamespacedName
+        | N.JSXMemberExpression
+        | N.JSXPropShorthandAttribute = this.jsxParseNamespacedName();
+      if (
+        node.type === "JSXNamespacedName" ||
+        node.type === "JSXPropShorthandAttribute"
+      ) {
         return node;
       }
       while (this.eat(tt.dot)) {
@@ -416,15 +442,12 @@ export default (superClass: typeof Parser) =>
         return this.finishNode(node, "JSXSpreadAttribute");
       }
 
-      // new syntax for JSX Prop Shorthand e.g <CompA ::propA ::propB /> to represent <CompA propA={propA} propB={propB} />
       if (this.match(tt.doubleColon)) {
         this.next();
         node.name = this.jsxParseIdentifier();
-
-        console.log(node.name);
-
         return this.finishNode(node, "JSXPropShorthandAttribute");
       }
+
       node.name = this.jsxParseNamespacedName();
       node.value = this.eat(tt.eq) ? this.jsxParseAttributeValue() : null;
       return this.finishNode(node, "JSXAttribute");
@@ -625,6 +648,16 @@ export default (superClass: typeof Parser) =>
         if (code === charCodes.greaterThan) {
           ++this.state.pos;
           this.finishToken(tt.jsxTagEnd);
+          return;
+        }
+
+        if (
+          code === charCodes.colon &&
+          this.input.charCodeAt(this.state.pos + 1) === charCodes.colon
+        ) {
+          console.log("Tokenizing a double colon...");
+          this.finishOp(tt.doubleColon, 2);
+          this.finishToken(tt.doubleColon);
           return;
         }
 
