@@ -651,11 +651,11 @@ export default (superClass: typeof Parser) =>
           return;
         }
 
+        // Proposal for tokenizing a JSXPropShorthandAttribute
         if (
           code === charCodes.colon &&
           this.input.charCodeAt(this.state.pos + 1) === charCodes.colon
         ) {
-          console.log("Tokenizing a double colon...");
           this.finishOp(tt.doubleColon, 2);
           this.finishToken(tt.doubleColon);
           return;
