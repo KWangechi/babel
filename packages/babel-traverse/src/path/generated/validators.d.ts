@@ -507,6 +507,10 @@ interface BaseNodePathValidators {
     this: NodePath,
     opts?: Opts<t.JSXOpeningFragment>,
   ): this is NodePath<t.JSXOpeningFragment>;
+  isJSXPropShorthandAttribute(
+    this: NodePath,
+    opts?: Opts<t.JSXPropShorthandAttribute>,
+  ): this is NodePath<t.JSXPropShorthandAttribute>;
   isJSXSpreadAttribute(
     this: NodePath,
     opts?: Opts<t.JSXSpreadAttribute>,

@@ -975,6 +975,12 @@ export function assertJSXIdentifier(
 ): asserts node is t.JSXIdentifier {
   assert("JSXIdentifier", node, opts);
 }
+export function assertJSXPropShorthandAttribute(
+  node: object | null | undefined,
+  opts?: object | null,
+): asserts node is t.JSXPropShorthandAttribute {
+  assert("JSXPropShorthandAttribute", node, opts);
+}
 export function assertJSXMemberExpression(
   node: object | null | undefined,
   opts?: object | null,

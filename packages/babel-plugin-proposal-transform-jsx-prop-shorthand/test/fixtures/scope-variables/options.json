@@ -1,0 +1,3 @@
+{
+  "plugins": ["proposal-transform-jsx-prop-shorthand", "syntax-jsx"]
+}

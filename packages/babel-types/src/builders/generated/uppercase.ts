@@ -164,6 +164,7 @@ export {
   jsxExpressionContainer as JSXExpressionContainer,
   jsxSpreadChild as JSXSpreadChild,
   jsxIdentifier as JSXIdentifier,
+  jsxPropShorthandAttribute as JSXPropShorthandAttribute,
   jsxMemberExpression as JSXMemberExpression,
   jsxNamespacedName as JSXNamespacedName,
   jsxOpeningElement as JSXOpeningElement,

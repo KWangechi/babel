@@ -114,6 +114,7 @@ export interface ExplVisitorBase<S> {
   JSXNamespacedName?: ExplVisitNode<S, t.JSXNamespacedName>;
   JSXOpeningElement?: ExplVisitNode<S, t.JSXOpeningElement>;
   JSXOpeningFragment?: ExplVisitNode<S, t.JSXOpeningFragment>;
+  JSXPropShorthandAttribute?: ExplVisitNode<S, t.JSXPropShorthandAttribute>;
   JSXSpreadAttribute?: ExplVisitNode<S, t.JSXSpreadAttribute>;
   JSXSpreadChild?: ExplVisitNode<S, t.JSXSpreadChild>;
   JSXText?: ExplVisitNode<S, t.JSXText>;
@@ -388,6 +389,7 @@ export interface VisitorBaseNodes<S> {
   JSXNamespacedName?: VisitNode<S, t.JSXNamespacedName>;
   JSXOpeningElement?: VisitNode<S, t.JSXOpeningElement>;
   JSXOpeningFragment?: VisitNode<S, t.JSXOpeningFragment>;
+  JSXPropShorthandAttribute?: VisitNode<S, t.JSXPropShorthandAttribute>;
   JSXSpreadAttribute?: VisitNode<S, t.JSXSpreadAttribute>;
   JSXSpreadChild?: VisitNode<S, t.JSXSpreadChild>;
   JSXText?: VisitNode<S, t.JSXText>;

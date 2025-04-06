@@ -103,6 +103,17 @@ defineType("JSXIdentifier", {
   },
 });
 
+// Proposal for a jsx shorthand prop attribute
+defineType("JSXPropShorthandAttribute", {
+  builder: ["name"],
+  // aliases: ["Immutable"],
+  fields: {
+    name: {
+      validate: assertNodeType("JSXIdentifier"),
+    },
+  },
+});
+
 defineType("JSXMemberExpression", {
   visitor: ["object", "property"],
   fields: {
@@ -144,7 +155,11 @@ defineType("JSXOpeningElement", {
     selfClosing: {
       default: false,
     },
-    attributes: validateArrayOfType("JSXAttribute", "JSXSpreadAttribute"),
+    attributes: validateArrayOfType(
+      "JSXAttribute",
+      "JSXSpreadAttribute",
+      "JSXPropShorthandAttribute",
+    ),
     typeArguments: {
       validate: process.env.BABEL_8_BREAKING
         ? assertNodeType(

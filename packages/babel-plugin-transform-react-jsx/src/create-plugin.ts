@@ -13,6 +13,7 @@ import type {
   JSXElement,
   JSXFragment,
   JSXOpeningElement,
+  JSXPropShorthandAttribute,
   JSXSpreadAttribute,
   MemberExpression,
   ObjectExpression,
@@ -431,7 +432,9 @@ You can set \`throwIfNamespace: false\` to bypass this warning.`,
 
     function accumulateAttribute(
       array: ObjectExpression["properties"],
-      attribute: NodePath<JSXAttribute | JSXSpreadAttribute>,
+      attribute: NodePath<
+        JSXAttribute | JSXSpreadAttribute | JSXPropShorthandAttribute
+      >,
     ) {
       if (t.isJSXSpreadAttribute(attribute.node)) {
         const arg = attribute.node.argument;
@@ -441,6 +444,15 @@ You can set \`throwIfNamespace: false\` to bypass this warning.`,
         } else {
           array.push(t.spreadElement(arg));
         }
+        return array;
+      }
+
+      // Handle JSXPropShorthandAttribute
+      if (t.isJSXPropShorthandAttribute(attribute.node)) {
+        const propName = attribute.node.name.name;
+        array.push(
+          t.objectProperty(t.identifier(propName), t.identifier(propName)),
+        );
         return array;
       }
 
@@ -590,7 +602,9 @@ You can set \`throwIfNamespace: false\` to bypass this warning.`,
     // Builds props for React.jsx. This function adds children into the props
     // and ensures that props is always an object
     function buildJSXOpeningElementAttributes(
-      attribs: NodePath<JSXAttribute | JSXSpreadAttribute>[],
+      attribs: NodePath<
+        JSXAttribute | JSXSpreadAttribute | JSXPropShorthandAttribute
+      >[],
       children: Expression[],
     ) {
       const props = attribs.reduce(accumulateAttribute, []);
@@ -704,7 +718,9 @@ You can set \`throwIfNamespace: false\` to bypass this warning.`,
     function buildCreateElementOpeningElementAttributes(
       file: PluginPass,
       path: NodePath<JSXElement>,
-      attribs: NodePath<JSXAttribute | JSXSpreadAttribute>[],
+      attribs: NodePath<
+        JSXAttribute | JSXSpreadAttribute | JSXPropShorthandAttribute
+      >[],
     ) {
       const runtime = get(file, "runtime");
       if (!process.env.BABEL_8_BREAKING) {

@@ -27,7 +27,6 @@ import * as NodePath_virtual_types_validator from "./lib/virtual-types-validator
 import type { NodePathAssertions } from "./generated/asserts.ts";
 import type { NodePathValidators } from "./generated/validators.ts";
 import { setup } from "./context.ts";
-
 const debug = buildDebug("babel");
 
 export const REMOVED = 1 << 0;

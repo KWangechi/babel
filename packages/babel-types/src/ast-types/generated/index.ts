@@ -153,6 +153,7 @@ export type Node =
   | JSXNamespacedName
   | JSXOpeningElement
   | JSXOpeningFragment
+  | JSXPropShorthandAttribute
   | JSXSpreadAttribute
   | JSXSpreadChild
   | JSXText
@@ -1541,6 +1542,11 @@ export interface JSXIdentifier extends BaseNode {
   name: string;
 }
 
+export interface JSXPropShorthandAttribute extends BaseNode {
+  type: "JSXPropShorthandAttribute";
+  name: JSXIdentifier;
+}
+
 export interface JSXMemberExpression extends BaseNode {
   type: "JSXMemberExpression";
   object: JSXMemberExpression | JSXIdentifier;
@@ -1556,7 +1562,9 @@ export interface JSXNamespacedName extends BaseNode {
 export interface JSXOpeningElement extends BaseNode {
   type: "JSXOpeningElement";
   name: JSXIdentifier | JSXMemberExpression | JSXNamespacedName;
-  attributes: Array<JSXAttribute | JSXSpreadAttribute>;
+  attributes: Array<
+    JSXAttribute | JSXSpreadAttribute | JSXPropShorthandAttribute
+  >;
   selfClosing: boolean;
   typeArguments?: TypeParameterInstantiation | null;
   typeParameters?: TSTypeParameterInstantiation | null;
@@ -2642,6 +2650,7 @@ export type JSX =
   | JSXExpressionContainer
   | JSXSpreadChild
   | JSXIdentifier
+  | JSXPropShorthandAttribute
   | JSXMemberExpression
   | JSXNamespacedName
   | JSXOpeningElement
@@ -5062,7 +5071,8 @@ export interface ParentMaps {
     | JSXClosingElement
     | JSXMemberExpression
     | JSXNamespacedName
-    | JSXOpeningElement;
+    | JSXOpeningElement
+    | JSXPropShorthandAttribute;
   JSXMemberExpression:
     | JSXClosingElement
     | JSXMemberExpression
@@ -5070,6 +5080,7 @@ export interface ParentMaps {
   JSXNamespacedName: JSXAttribute | JSXClosingElement | JSXOpeningElement;
   JSXOpeningElement: JSXElement;
   JSXOpeningFragment: JSXFragment;
+  JSXPropShorthandAttribute: JSXOpeningElement;
   JSXSpreadAttribute: JSXOpeningElement;
   JSXSpreadChild: JSXElement | JSXFragment;
   JSXText: JSXElement | JSXFragment;

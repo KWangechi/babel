@@ -1617,6 +1617,16 @@ export function isJSXIdentifier(
 
   return opts == null || shallowEqual(node, opts);
 }
+export function isJSXPropShorthandAttribute(
+  node: t.Node | null | undefined,
+  opts?: Opts<t.JSXPropShorthandAttribute> | null,
+): node is t.JSXPropShorthandAttribute {
+  if (!node) return false;
+
+  if (node.type !== "JSXPropShorthandAttribute") return false;
+
+  return opts == null || shallowEqual(node, opts);
+}
 export function isJSXMemberExpression(
   node: t.Node | null | undefined,
   opts?: Opts<t.JSXMemberExpression> | null,
@@ -3736,6 +3746,7 @@ export function isJSX(
     case "JSXExpressionContainer":
     case "JSXSpreadChild":
     case "JSXIdentifier":
+    case "JSXPropShorthandAttribute":
     case "JSXMemberExpression":
     case "JSXNamespacedName":
     case "JSXOpeningElement":

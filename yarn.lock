@@ -1604,6 +1604,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@babel/plugin-proposal-transform-jsx-prop-shorthand@workspace:packages/babel-plugin-proposal-transform-jsx-prop-shorthand":
+  version: 0.0.0-use.local
+  resolution: "@babel/plugin-proposal-transform-jsx-prop-shorthand@workspace:packages/babel-plugin-proposal-transform-jsx-prop-shorthand"
+  dependencies:
+    "@babel/core": "workspace:^"
+    "@babel/helper-plugin-test-runner": "workspace:^"
+    "@babel/helper-plugin-utils": "workspace:^"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  languageName: unknown
+  linkType: soft
+
 "@babel/plugin-syntax-async-do-expressions@workspace:packages/babel-plugin-syntax-async-do-expressions":
   version: 0.0.0-use.local
   resolution: "@babel/plugin-syntax-async-do-expressions@workspace:packages/babel-plugin-syntax-async-do-expressions"

@@ -170,6 +170,9 @@
       "@babel/plugin-proposal-throw-expressions": [
         "./packages/babel-plugin-proposal-throw-expressions/src"
       ],
+      "@babel/plugin-proposal-transform-jsx-prop-shorthand": [
+        "./packages/babel-plugin-proposal-transform-jsx-prop-shorthand/src"
+      ],
       "@babel/plugin-syntax-async-do-expressions": [
         "./packages/babel-plugin-syntax-async-do-expressions/src"
       ],

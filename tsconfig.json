@@ -181,6 +181,9 @@
       "path": "./packages/babel-plugin-proposal-throw-expressions"
     },
     {
+      "path": "./packages/babel-plugin-proposal-transform-jsx-prop-shorthand"
+    },
+    {
       "path": "./packages/babel-plugin-syntax-async-do-expressions"
     },
     {

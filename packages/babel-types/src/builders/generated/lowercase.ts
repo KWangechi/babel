@@ -2249,6 +2249,18 @@ export function jsxIdentifier(name: string): t.JSXIdentifier {
   return node;
 }
 export { jsxIdentifier as jSXIdentifier };
+export function jsxPropShorthandAttribute(
+  name: t.JSXIdentifier,
+): t.JSXPropShorthandAttribute {
+  const node: t.JSXPropShorthandAttribute = {
+    type: "JSXPropShorthandAttribute",
+    name,
+  };
+  const defs = NODE_FIELDS.JSXPropShorthandAttribute;
+  validate(defs.name, node, "name", name, 1);
+  return node;
+}
+export { jsxPropShorthandAttribute as jSXPropShorthandAttribute };
 export function jsxMemberExpression(
   object: t.JSXMemberExpression | t.JSXIdentifier,
   property: t.JSXIdentifier,
@@ -2281,7 +2293,9 @@ export function jsxNamespacedName(
 export { jsxNamespacedName as jSXNamespacedName };
 export function jsxOpeningElement(
   name: t.JSXIdentifier | t.JSXMemberExpression | t.JSXNamespacedName,
-  attributes: Array<t.JSXAttribute | t.JSXSpreadAttribute>,
+  attributes: Array<
+    t.JSXAttribute | t.JSXSpreadAttribute | t.JSXPropShorthandAttribute
+  >,
   selfClosing: boolean = false,
 ): t.JSXOpeningElement {
   const node: t.JSXOpeningElement = {

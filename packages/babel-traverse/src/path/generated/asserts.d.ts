@@ -377,6 +377,9 @@ export interface NodePathAssertions {
   assertJSXOpeningFragment(
     opts?: Opts<t.JSXOpeningFragment>,
   ): asserts this is NodePath<t.JSXOpeningFragment>;
+  assertJSXPropShorthandAttribute(
+    opts?: Opts<t.JSXPropShorthandAttribute>,
+  ): asserts this is NodePath<t.JSXPropShorthandAttribute>;
   assertJSXSpreadAttribute(
     opts?: Opts<t.JSXSpreadAttribute>,
   ): asserts this is NodePath<t.JSXSpreadAttribute>;
