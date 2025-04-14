@@ -35,6 +35,14 @@ export function JSXSpreadAttribute(this: Printer, node: t.JSXSpreadAttribute) {
   this.rightBrace(node);
 }
 
+export function JSXPropShorthandAttribute(
+  this: Printer,
+  node: t.JSXPropShorthandAttribute,
+) {
+  this.token("::");
+  this.print(node.name);
+}
+
 export function JSXExpressionContainer(
   this: Printer,
   node: t.JSXExpressionContainer,

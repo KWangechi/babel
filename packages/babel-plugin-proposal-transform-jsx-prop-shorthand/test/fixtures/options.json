@@ -1,0 +1,4 @@
+{
+  "plugins": ["proposal-transform-jsx-prop-shorthand", "syntax-jsx"],
+  "presets": ["env", "react"]
+}
